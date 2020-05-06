@@ -10,14 +10,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   computed: {
-    lessons() {
-      return 0;
-    },
-    price() {
-      return 0;
-    }
+    ...mapGetters({
+      lessons: "lessonsInCart",
+      price: "priceInCart"
+    })
   }
 };
 </script>
