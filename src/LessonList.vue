@@ -1,20 +1,25 @@
 <template>
   <div>
-    <div v-for="(lesson, index) in lessons" :key="index">
-      <span>{{lesson.title}}</span>
-    </div>
+    <LessonItem v-for="(lesson, index) in lessons" :lesson="lesson" :key="index" />
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import LessonItem from "./LessonItem.vue";
+
 export default {
+  components: {
+    LessonItem
+  },
   computed: {
-    lessons() {
-      return this.$store.state.lessons;
-    }
+    ...mapState(["lessons"])
+  },
+  methods: {
+    ...mapActions(["fetchLessons"])
   },
   mounted() {
-    this.$store.dispatch("fetchLessons");
+    this.fetchLessons();
   }
 };
 </script>
